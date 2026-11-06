@@ -1,0 +1,32 @@
+* {
+  font-family: "Hack Nerd Font", monospace;
+  font-size: 12px;
+  border-radius: 0;
+  min-height: 0;
+}
+window#waybar {
+  background: #202630;
+  color: #e5e9f0;
+  border-bottom: 2px solid #6e9ebf;
+}
+#workspaces button {
+  color: #aab7c7;
+  padding: 0 12px;
+  border: none;
+  box-shadow: none;
+}
+#workspaces button.focused { background: #3c526a; color: #ffffff; }
+#workspaces button.urgent { background: #b64c5b; color: #ffffff; }
+#workspaces button:hover { background: #334155; }
+#network, #pulseaudio, #backlight, #battery, #tray, #clock, #mode {
+  padding: 0 10px;
+}
+#network { color: #8fcee4; }
+#pulseaudio { color: #b7c8ef; }
+#pulseaudio.muted { color: #d29b9b; }
+#backlight { color: #e7ca85; }
+#battery { color: #a5d4ad; }
+#battery.warning { color: #e7ca85; }
+#battery.critical { color: #ef9393; }
+#clock { color: #e5e9f0; }
+tooltip { background: #202630; border: 1px solid #6e9ebf; }
