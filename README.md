@@ -28,5 +28,5 @@ ln -s ~/.config/sway/waybar ~/.config/waybar
 Validate with `sway --validate --config ~/.config/sway/config`.
 Reload with **Super+Shift+C**.
 
-Media and brightness keys use 5% steps; volume increases stop at 100%.
+Volume keys use 5% steps; brightness keys use 10%. Volume increases stop at 100%.
 Untouched system configuration baseline: `80785d4`.
