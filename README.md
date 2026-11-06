@@ -18,23 +18,25 @@ The configuration does not include `/etc/sway/config` or its `config.d` director
 services remain dependencies. Review system Sway updates against the baseline
 before selectively adopting their configuration changes.
 
-## Waybar activation pending
+## Startup and reload
 
-Waybar is not yet installed. The default Swaybar remains configured so the next
-login or reload still has a bar. The separate demo may continue running until
-Waybar is installed and permanent activation is completed.
+Sway starts the installed `/usr/bin/waybar` through its `bar` block. Waybar loads
+`~/.config/waybar/config.jsonc` and `style.css` through the directory symlink.
+The temporary demo service has been stopped. No separate Waybar service or
+additional autostart command is needed.
 
-Once `/usr/bin/waybar` is installed, replace the existing `bar` block with:
+After edits, validate Sway with:
 
-```text
-bar {
-    swaybar_command waybar
-}
+```bash
+sway --validate --config ~/.config/sway/config
 ```
 
-Validate with `sway --validate --config ~/.config/sway/config`, stop the
-`laptop-waybar-demo.service` user unit, and reload Sway. Commit the activation
-separately. Do not add a second autostart command or a separate Waybar service.
+Then reload with Super+Shift+C. Sway manages the bar process across reloads.
+
+Waybar was installed as `0.14.0-1.el10` from the existing wlroots COPR. That
+repository now uses an empty `includepkgs` and the blocklist
+`sway*,wlroots*,wmenu*,xdg-desktop-portal-wlr*`. Waybar and its dependencies can
+receive normal DNF updates; the protected package names use other repositories.
 
 ## Controls and dependencies
 
