@@ -18,7 +18,7 @@ window#waybar {
 #workspaces button.focused { background: #3c526a; color: #ffffff; }
 #workspaces button.urgent { background: #b64c5b; color: #ffffff; }
 #workspaces button:hover { background: #334155; }
-#network, #pulseaudio, #backlight, #battery, #tray, #clock, #mode {
+#cpu, #memory, #network, #pulseaudio, #backlight, #battery, #tray, #clock, #mode {
   padding: 0 10px;
 }
 #network { color: #8fcee4; }

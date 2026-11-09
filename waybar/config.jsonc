@@ -8,6 +8,8 @@
     "sway/mode"
   ],
   "modules-right": [
+    "cpu",
+    "memory",
     "network",
     "pulseaudio",
     "backlight",
@@ -65,7 +67,9 @@
       "",
       ""
     ],
-    "tooltip-format": "{timeTo} · {power:.1f} W"
+    "tooltip-format": "{timeTo} · {power:.1f} W",
+    "format-discharging": "{icon}  {capacity}% · {power:.1f} W",
+    "interval": 5
   },
   "tray": {
     "icon-size": 18,
@@ -74,5 +78,15 @@
   "clock": {
     "format": "{:%a %d %b  %H:%M}",
     "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "cpu": {
+    "format": "CPU {usage}%",
+    "interval": 2,
+    "tooltip-format": "CPU usage: {usage}%\nLoad: {load}\nAverage frequency: {avg_frequency:.2f} GHz"
+  },
+  "memory": {
+    "format": "RAM {used:.1f}G",
+    "interval": 5,
+    "tooltip-format": "RAM: {used:.1f} / {total:.1f} GiB\nAvailable: {avail:.1f} GiB\nSwap: {swapUsed:.1f} / {swapTotal:.1f} GiB"
   }
 }

@@ -54,6 +54,8 @@ Reload with **Super+Shift+C**.
 
 **Super+D** searches applications and PATH commands in one Rofi menu.
 
+Waybar shows CPU usage, RAM in GiB, and battery watts while discharging.
+
 **Ctrl+Alt+L** locks. Idle locking starts after 5 minutes; displays turn off after
 10 minutes and wake on input. Locking also runs before suspend. Lid behavior
 uses logind defaults; no automatic idle-suspend timer is configured.
