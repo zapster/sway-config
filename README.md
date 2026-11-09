@@ -41,6 +41,14 @@ ln -s ~/.config/sway/swappy/config ~/.config/swappy/config
 `~/Pictures/Screenshots` with a timestamped name. Copy or save closes the window;
 close without either to discard. Ctrl+B toggles the hidden editing panel.
 
+For the existing **Sway with Keyring** GDM entry, install the session wrapper:
+
+```bash
+sudo install -m 755 ~/.config/sway/scripts/session /usr/local/bin/sway-session
+```
+
+Machine-specific startup settings go in ignored `session.local`.
+
 Validate with `sway --validate --config ~/.config/sway/config`.
 Reload with **Super+Shift+C**.
 

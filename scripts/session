@@ -1,0 +1,10 @@
+#!/bin/sh
+# Entry point used by the GDM "Sway with Keyring" session.
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+
+# Optional, untracked settings for this machine, applied before Sway starts.
+if [ -r "$HOME/.config/sway/session.local" ]; then
+    . "$HOME/.config/sway/session.local" || exit $?
+fi
+
+exec /usr/bin/sway "$@"
