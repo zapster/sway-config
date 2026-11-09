@@ -13,9 +13,8 @@ Sway with Alacritty, wmenu, and Waybar using Hack Nerd Font.
 | `brightnessctl`, supported kernel backlight | Brightness keys |
 | `pavucontrol`, `nm-connection-editor`, NetworkManager | Bar settings actions |
 | `grim` | Print-key screenshots |
-| `dbus-update-activation-environment` (dbus-tools), systemd user session | Session environment |
-
-The commented idle/lock example additionally requires `swayidle` and `swaylock`.
+| `swaylock`, `swayidle` | Screen locking, idle timers, pre-suspend locking |
+| `dbus-update-activation-environment` (dbus-tools), systemd/logind (`loginctl`) | Session environment and lock/suspend integration |
 
 ## Setup
 
@@ -27,6 +26,11 @@ ln -s ~/.config/sway/waybar ~/.config/waybar
 
 Validate with `sway --validate --config ~/.config/sway/config`.
 Reload with **Super+Shift+C**.
+
+**Ctrl+Alt+L** locks. Idle locking starts after 5 minutes; displays turn off after
+10 minutes and wake on input. Locking also runs before suspend. Lid behavior
+uses logind defaults; no automatic idle-suspend timer is configured.
+Restart `swayidle` after editing `idle.conf`; ordinary Sway reloads keep it running.
 
 Volume keys use 5% steps; brightness keys use 10%. Volume increases stop at 100%.
 Untouched system configuration baseline: `80785d4`.
