@@ -113,6 +113,14 @@ exec swayidle -w -C ~/.config/sway/idle.conf
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    # Navigate workspaces and return to the previously focused workspace
+    bindsym $mod+y workspace prev
+    bindsym $mod+o workspace next
+    bindsym $mod+Tab workspace back_and_forth
+
+    # Focus the latest urgent window
+    bindsym $mod+u [urgent=latest] focus
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
