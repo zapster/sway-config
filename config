@@ -16,7 +16,7 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 # Your preferred application launcher
-set $menu wmenu-run
+set $menu rofi -show combi -modes combi -combi-modes drun,run -show-icons -terminal alacritty
 
 ### Output configuration
 #
@@ -58,7 +58,7 @@ exec swayidle -w -C ~/.config/sway/idle.conf
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec "$menu"
 
     # Lock through logind; swayidle handles the lock request.
     bindsym Control+Mod1+l exec loginctl lock-session
@@ -211,4 +211,4 @@ bar {
 }
 
 # Publish the Sway session environment for D-Bus and systemd services.
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway SSH_AUTH_SOCK

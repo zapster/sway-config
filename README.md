@@ -1,18 +1,19 @@
 # Sway configuration
 
-Sway with Alacritty, wmenu, and Waybar using Hack Nerd Font.
+Sway with Alacritty, Rofi, and Waybar using Hack Nerd Font.
 
 ## Dependencies
 
 | Tools/services | Purpose |
 | --- | --- |
 | Sway (`sway`, `swaymsg`, `swaynag`), `swaybg` | Compositor, session controls, wallpaper |
-| `alacritty`, `wmenu-run` (wmenu) | Terminal and launcher |
+| `alacritty`, `rofi` (2.0+ with Wayland support) | Terminal and launcher |
 | `waybar`, Hack Nerd Font | Bar and icons |
 | PipeWire, pipewire-pulseaudio, WirePlumber (`wpctl`) | Audio widgets and media keys |
 | `brightnessctl`, supported kernel backlight | Brightness keys |
 | `pavucontrol`, `nm-connection-editor`, NetworkManager | Bar settings actions |
-| `grim` | Print-key screenshots |
+| `grim`, `slurp`, `swappy` | Screen/area capture and editing, save/copy |
+| `xdg-desktop-portal`, `xdg-desktop-portal-wlr`, `xdg-desktop-portal-gtk` | Screen sharing and desktop integration |
 | `swaylock`, `swayidle` | Screen locking, idle timers, pre-suspend locking |
 | `dbus-update-activation-environment` (dbus-tools), systemd/logind (`loginctl`) | Session environment and lock/suspend integration |
 
@@ -24,8 +25,26 @@ Clone to `~/.config/sway` and link the Waybar configuration:
 ln -s ~/.config/sway/waybar ~/.config/waybar
 ```
 
+Install the screenshot launchers and link Swappy settings:
+
+```bash
+mkdir -p ~/.local/share/applications ~/.config/swappy
+for mode in area screen; do
+    sed "s|@SCRIPT@|$HOME/.config/sway/scripts/screenshot|g" \
+        ~/.config/sway/applications/sway-screenshot-$mode.desktop.in \
+        > ~/.local/share/applications/sway-screenshot-$mode.desktop
+done
+ln -s ~/.config/sway/swappy/config ~/.config/swappy/config
+```
+
+**Screenshot Area/Screen** in Rofi opens Swappy: Ctrl+C copies; Ctrl+S saves to
+`~/Pictures/Screenshots` with a timestamped name. Copy or save closes the window;
+close without either to discard. Ctrl+B toggles the hidden editing panel.
+
 Validate with `sway --validate --config ~/.config/sway/config`.
 Reload with **Super+Shift+C**.
+
+**Super+D** searches applications and PATH commands in one Rofi menu.
 
 **Ctrl+Alt+L** locks. Idle locking starts after 5 minutes; displays turn off after
 10 minutes and wake on input. Locking also runs before suspend. Lid behavior

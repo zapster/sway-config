@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Screenshot Area
+Comment=Capture a selected area and open in Swappy
+Exec="@SCRIPT@" area
+Icon=edit-select-all-symbolic
+Terminal=false
+Categories=Graphics;
+StartupNotify=false

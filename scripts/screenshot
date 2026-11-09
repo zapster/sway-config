@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+
+case "${1:-}" in
+    area) geometry=$(slurp) || exit 0 ;;
+    screen) ;;
+    *) printf 'Usage: %s area|screen\n' "$0" >&2; exit 2 ;;
+esac
+
+capture_file=$(mktemp --suffix=.png)
+trap 'rm -f "$capture_file"' EXIT
+trap 'exit 1' HUP INT TERM
+
+if [ "$1" = area ]; then
+    grim -g "$geometry" "$capture_file"
+else
+    grim "$capture_file"
+fi
+swappy -f "$capture_file"

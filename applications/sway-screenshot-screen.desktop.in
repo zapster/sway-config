@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Screenshot Screen
+Comment=Capture the whole screen and open in Swappy
+Exec="@SCRIPT@" screen
+Icon=video-display-symbolic
+Terminal=false
+Categories=Graphics;
+StartupNotify=false
