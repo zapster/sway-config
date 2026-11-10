@@ -219,4 +219,4 @@ bar {
 }
 
 # Publish the Sway session environment for D-Bus and systemd services.
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway SSH_AUTH_SOCK
+exec ~/.config/sway/scripts/session-start

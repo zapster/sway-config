@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+# Publish the compositor environment before activating graphical user services.
+dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway SSH_AUTH_SOCK
+# Recover services even if a previous session left the target active.
+if [ -r "$HOME/.config/kanshi/config" ]; then
+    systemctl --user reset-failed kanshi.service
+    exec systemctl --user start sway-session.target kanshi.service
+fi
+exec systemctl --user start sway-session.target

@@ -7,4 +7,18 @@ if [ -r "$HOME/.config/sway/session.local" ]; then
     . "$HOME/.config/sway/session.local" || exit $?
 fi
 
-exec /usr/bin/sway "$@"
+# Keep the session target tied to the compositor's lifetime.
+cleanup() {
+    systemctl --user stop sway-session.target || :
+}
+trap cleanup EXIT
+/usr/bin/sway "$@" &
+sway_pid=$!
+trap 'kill -TERM "$sway_pid" 2>/dev/null || :' HUP INT TERM
+wait "$sway_pid"
+status=$?
+# A trapped signal can interrupt wait before the compositor exits.
+if kill -0 "$sway_pid" 2>/dev/null; then
+    wait "$sway_pid" || :
+fi
+exit "$status"

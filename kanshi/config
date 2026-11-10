@@ -1,0 +1,2 @@
+# Profiles belong to this machine; see config.example for a starting point.
+include ~/.config/sway/kanshi/config.local

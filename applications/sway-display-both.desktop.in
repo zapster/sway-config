@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Display Both
+Exec="@SCRIPT@" both
+Icon=video-display
+Terminal=false
+Categories=Settings;HardwareSettings;

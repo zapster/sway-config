@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Display Dock
+Exec="@SCRIPT@" dock
+Icon=video-display
+Terminal=false
+Categories=Settings;HardwareSettings;

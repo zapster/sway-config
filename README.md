@@ -14,6 +14,7 @@ Sway with Alacritty, Rofi, and Waybar using Hack Nerd Font.
 | `pavucontrol`, `nm-connection-editor`, NetworkManager | Bar settings actions |
 | `grim`, `slurp`, `swappy` | Screen/area capture and editing, save/copy |
 | `xdg-desktop-portal`, `xdg-desktop-portal-wlr`, `xdg-desktop-portal-gtk` | Screen sharing and desktop integration |
+| `kanshi` (1.9+), `wdisplays`, `jq` | Automatic display profiles, graphical adjustment, rescue launcher |
 | `swaylock`, `swayidle` | Screen locking, idle timers, pre-suspend locking |
 | `dbus-update-activation-environment` (dbus-tools), systemd/logind (`loginctl`) | Session environment and lock/suspend integration |
 
@@ -63,3 +64,20 @@ Restart `swayidle` after editing `idle.conf`; ordinary Sway reloads keep it runn
 
 Volume keys use 5% steps; brightness keys use 10%. Volume increases stop at 100%.
 Untouched system configuration baseline: `80785d4`.
+
+## Displays
+
+Link `kanshi/config` to `~/.config/kanshi/config` and copy `kanshi/config.example`
+to ignored `kanshi/config.local`, adapting it for this machine. Link
+`systemd/sway-session.target` into `~/.config/systemd/user/`, run
+`systemctl --user daemon-reload`, then `systemctl --user enable kanshi.service`.
+Install the session wrapper above again after updating it. Sway publishes its
+environment before starting the session target; the wrapper stops it on logout.
+
+Generate `applications/sway-display-*.desktop.in` into `~/.local/share/applications/`,
+replacing `@SCRIPT@` with the absolute path to `scripts/display-profile`.
+**Display Laptop/Dock/Both** select profiles (Laptop holds a manual override); **Display Auto** restarts kanshi
+and selects the first matching profile. **Display Rescue** stops kanshi and
+enables the internal display before disabling external outputs; Auto resumes it.
+Use the existing **wdisplays** launcher to experiment, then save accepted values
+in `kanshi/config.local` and run `systemctl --user reload kanshi`.

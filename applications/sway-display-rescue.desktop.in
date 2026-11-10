@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Display Rescue
+Exec="@SCRIPT@" rescue
+Icon=video-display
+Terminal=false
+Categories=Settings;HardwareSettings;

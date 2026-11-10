@@ -1,0 +1,24 @@
+# Put profiles in config.local (ignored by Git). First matching profile wins.
+output eDP-1 mode 1920x1200@120Hz scale 1
+output "Dell Inc. DELL U2720Q 50C5V83" mode 3840x2160@59.996Hz scale 1.5
+
+profile dock {
+    output eDP-1 disable
+    output "Dell Inc. DELL U2720Q 50C5V83" enable position 0,0
+}
+
+profile both {
+    output eDP-1 enable position 0,0
+    output "Dell Inc. DELL U2720Q 50C5V83" enable position 1920,0
+}
+
+# Automatic undocked profile: must stop matching when another display appears.
+profile laptop {
+    output eDP-1 enable position 0,0
+}
+
+# Explicit Laptop override; Auto returns to automatic profile selection.
+profile manual-laptop {
+    output eDP-1 enable position 0,0
+    ...output "*" disable
+}

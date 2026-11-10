@@ -1,0 +1,21 @@
+#!/bin/sh
+set -eu
+case "${1:-}" in
+    laptop) exec kanshictl switch manual-laptop ;;
+    dock|both) exec kanshictl switch "$1" ;;
+    auto) exec systemctl --user restart kanshi.service ;;
+    rescue)
+        # Bypass kanshi and enable the internal display before disabling others.
+        systemctl --user stop kanshi.service
+        outputs=$(swaymsg -r -t get_outputs)
+        internal=$(printf '%s' "$outputs" | jq -er '[.[] | select(.name | test("^(eDP|LVDS)-"))][0].name')
+        swaymsg -r "output \"$internal\" enable scale 1 position 0 0" |
+            jq -e 'length > 0 and all(.[]; .success == true)' >/dev/null
+        printf '%s' "$outputs" | jq -r --arg internal "$internal" '.[] | select(.name != $internal) | .name' |
+            while IFS= read -r output; do
+                swaymsg -r "output \"$output\" disable" |
+                    jq -e 'length > 0 and all(.[]; .success == true)' >/dev/null
+            done
+        ;;
+    *) printf 'Usage: %s laptop|dock|both|auto|rescue\n' "$0" >&2; exit 2 ;;
+esac
