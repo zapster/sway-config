@@ -10,7 +10,8 @@
   "modules-right": [
     "cpu",
     "memory",
-    "network",
+    "custom/ethernet",
+    "network#wifi",
     "pulseaudio",
     "backlight",
     "battery",
@@ -23,15 +24,6 @@
   },
   "sway/mode": {
     "format": "{}"
-  },
-  "network": {
-    "format-wifi": "  {signalStrength}%",
-    "format-ethernet": "  {ifname}",
-    "format-disconnected": "⚠ Offline",
-    "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format-wifi": "{essid}\nSignal: {signalStrength}%\n{ipaddr}/{cidr}",
-    "on-click-right": "nm-connection-editor",
-    "interval": 5
   },
   "pulseaudio": {
     "format": "{icon}  {volume}%",
@@ -88,5 +80,26 @@
     "format": "RAM {used:.1f}G",
     "interval": 5,
     "tooltip-format": "RAM: {used:.1f} / {total:.1f} GiB\nAvailable: {avail:.1f} GiB\nSwap: {swapUsed:.1f} / {swapTotal:.1f} GiB"
+  },
+  "network#wifi": {
+    "interface": "wl*",
+    "format": "  Wi-Fi",
+    "format-wifi": "  {essid} · {ipaddr}",
+    "format-linked": "  Wi-Fi · no IP",
+    "format-disconnected": "  Wi-Fi disconnected",
+    "format-disabled": "  Wi-Fi off",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr}\nRight-click: Wi-Fi settings",
+    "tooltip-format-wifi": "{essid}\nSignal: {signalStrength}%\n{ifname}: {ipaddr}/{cidr}\nRight-click: Wi-Fi settings",
+    "tooltip-format-disconnected": "Wi-Fi disconnected\nRight-click: Wi-Fi settings",
+    "tooltip-format-disabled": "Wi-Fi radio off\nRight-click: Wi-Fi settings",
+    "on-click-right": "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center wifi",
+    "max-length": 48,
+    "interval": 5
+  },
+  "custom/ethernet": {
+    "exec": "$HOME/.config/sway/scripts/ethernet-status",
+    "return-type": "json",
+    "interval": 5,
+    "on-click-right": "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center network"
   }
 }

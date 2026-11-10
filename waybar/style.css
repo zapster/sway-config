@@ -18,10 +18,12 @@ window#waybar {
 #workspaces button.focused { background: #3c526a; color: #ffffff; }
 #workspaces button.urgent { background: #b64c5b; color: #ffffff; }
 #workspaces button:hover { background: #334155; }
-#cpu, #memory, #network, #pulseaudio, #backlight, #battery, #tray, #clock, #mode {
+#cpu, #memory, #custom-ethernet, #network, #pulseaudio, #backlight, #battery, #tray, #clock, #mode {
   padding: 0 10px;
 }
-#network { color: #8fcee4; }
+#network, #custom-ethernet { color: #8fcee4; }
+#network.disconnected, #network.disabled, #custom-ethernet.disconnected { color: #d29b9b; }
+#network.linked, #custom-ethernet.linked { color: #e7ca85; }
 #pulseaudio { color: #b7c8ef; }
 #pulseaudio.muted { color: #d29b9b; }
 #backlight { color: #e7ca85; }

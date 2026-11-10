@@ -11,7 +11,8 @@ Sway with Alacritty, Rofi, and Waybar using Hack Nerd Font.
 | `waybar`, Hack Nerd Font | Bar and icons |
 | PipeWire, pipewire-pulseaudio, WirePlumber (`wpctl`) | Audio widgets and media keys |
 | `brightnessctl`, supported kernel backlight | Brightness keys |
-| `pavucontrol`, `nm-connection-editor`, NetworkManager | Bar settings actions |
+| `pavucontrol`, `gnome-control-center`, NetworkManager | Bar settings actions |
+| Python 3, `ip` (iproute) | Ethernet indicators across physical adapters |
 | `grim`, `slurp`, `swappy` | Screen/area capture and editing, save/copy |
 | `xdg-desktop-portal`, `xdg-desktop-portal-wlr`, `xdg-desktop-portal-gtk` | Screen sharing and desktop integration |
 | `kanshi` (1.9+), `wdisplays`, `jq` | Automatic display profiles, graphical adjustment, rescue launcher |
@@ -56,6 +57,8 @@ Reload with **Super+Shift+C**.
 **Super+D** searches applications and PATH commands in one Rofi menu.
 
 Waybar shows CPU usage, RAM in GiB, and battery watts while discharging.
+All physical Ethernet adapters show their name and IP or disconnected state.
+Wi-Fi appears independently with SSID/IP or off/disconnected state. Right-click Ethernet or Wi-Fi to open GNOME Network/Wi-Fi Settings.
 
 **Ctrl+Alt+L** locks. Idle locking starts after 5 minutes; displays turn off after
 10 minutes and wake on input. Locking also runs before suspend. Lid behavior

@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""Waybar JSON for physical Ethernet adapters, independent of the default route."""
+import html
+import json
+from pathlib import Path
+import subprocess
+
+OFFLINE_COLOR = "#d29b9b"
+LINKED_COLOR = "#e7ca85"
+
+interfaces = json.loads(subprocess.check_output(["ip", "-j", "address", "show"], text=True))
+labels = []
+connected = []
+linked = []
+details = []
+for interface in interfaces:
+    name = interface["ifname"]
+    device = Path("/sys/class/net") / name
+    if interface.get("link_type") != "ether" or not (device / "device").exists():
+        continue
+    if (device / "wireless").exists():
+        continue
+    addresses = [a for a in interface.get("addr_info", []) if a.get("scope") == "global"]
+    ipv4 = [a for a in addresses if a.get("family") == "inet"]
+    up = interface.get("operstate") == "UP"
+    label_name = html.escape(name)
+    if up and addresses:
+        address = (ipv4 or addresses)[0]["local"]
+        connected.append(name)
+        labels.append(f"  {label_name} · {html.escape(address)}")
+    elif up:
+        linked.append(name)
+        labels.append(f'<span foreground="{LINKED_COLOR}">  {label_name} · no IP</span>')
+    else:
+        labels.append(f'<span foreground="{OFFLINE_COLOR}">  {label_name} · offline</span>')
+    state = ", ".join(f"{a['local']}/{a['prefixlen']}" for a in addresses) if up and addresses else ("No IP address" if up else "Disconnected")
+    details.append(f"{name}: {state}")
+
+text = "    ".join(labels) or "  No Ethernet adapter"
+state = "ethernet" if connected else ("linked" if linked else "disconnected")
+tooltip = "\n".join(details) or "No Ethernet adapter detected"
+tooltip += "\nRight-click: Network settings"
+print(json.dumps({"text": text, "class": state, "tooltip": html.escape(tooltip)}, ensure_ascii=False))
