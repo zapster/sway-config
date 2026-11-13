@@ -20,8 +20,8 @@ set $menu rofi -show combi -modes combi -combi-modes drun,run -show-icons -termi
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/.config/sway/assets/sway-background.png fill
+# Optional machine-local wallpaper configuration.
+include ~/.config/sway/background.local
 #
 # Example configuration:
 #
