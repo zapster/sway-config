@@ -224,3 +224,6 @@ bar {
 
 # Publish the Sway session environment for D-Bus and systemd services.
 exec ~/.config/sway/scripts/session-start
+
+# Optional machine-local Sway configuration.
+include ~/.config/sway/config.local

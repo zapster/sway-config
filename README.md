@@ -31,6 +31,9 @@ ln -s ~/.config/sway/waybar ~/.config/waybar
 Machine-specific Sway settings can be kept in ignored local override files.
 The optional `background.local` include is for a local wallpaper directive;
 the shared config does not select a wallpaper.
+The shared config also optionally includes ignored `config.local`, which is
+parsed as Sway configuration syntax for machine-specific settings. Its absence
+is harmless; this is separate from the shell-oriented `session.local`.
 
 Install the screenshot launchers and link Swappy settings:
 
