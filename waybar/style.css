@@ -32,3 +32,6 @@ window#waybar {
 #battery.critical { color: #ef9393; }
 #clock { color: #e5e9f0; }
 tooltip { background: #202630; border: 1px solid #6e9ebf; }
+
+window#waybar.battery-warning { background: #55400a; }
+window#waybar.battery-critical { background: #681c28; }

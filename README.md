@@ -9,6 +9,7 @@ Sway with Alacritty, Rofi, and Waybar using Hack Nerd Font.
 | Sway (`sway`, `swaymsg`, `swaynag`), `swaybg` | Compositor, session controls, wallpaper |
 | `alacritty`, `rofi` (2.0+ with Wayland support) | Terminal and launcher |
 | `waybar`, Hack Nerd Font | Bar and icons |
+| `libnotify` (`notify-send`), notification daemon (e.g. `mako`) | Battery warnings |
 | PipeWire, pipewire-pulseaudio, WirePlumber (`wpctl`) | Audio widgets and media keys |
 | `brightnessctl`, supported kernel backlight | Brightness keys |
 | `pavucontrol`, `gnome-control-center`, NetworkManager | Bar settings actions |
@@ -61,6 +62,13 @@ Reload with **Super+Shift+C**.
 **Super+D** searches applications and PATH commands in one Rofi menu.
 
 Waybar shows CPU usage, RAM in GiB, and battery watts while discharging.
+While discharging, it sends normal-priority notifications at 20% and urgent
+notifications at 10%. Emergency shutdown policy is machine-local UPower
+configuration and is not managed by this shared Sway repository.
+The whole bar background is amber at or below 20% and deep red at or below 10%;
+the critical color takes precedence. These backgrounds follow battery capacity
+while charging too, and normal appearance returns above 20%. Notifications remain
+discharging-only.
 All physical Ethernet adapters show their name and IP or disconnected state.
 Wi-Fi appears independently with SSID/IP or off/disconnected state. Right-click Ethernet or Wi-Fi to open GNOME Network/Wi-Fi Settings.
 

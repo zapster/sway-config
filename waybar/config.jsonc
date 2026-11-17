@@ -46,8 +46,12 @@
   },
   "battery": {
     "states": {
-      "warning": 25,
+      "warning": 20,
       "critical": 10
+    },
+    "events": {
+      "on-discharging-warning": "notify-send -u normal 'Low battery' 'Battery at or below 20%. Connect power.'",
+      "on-discharging-critical": "notify-send -u critical 'Critical battery' 'Battery at or below 10%. Save your work and connect power.'"
     },
     "format": "{icon}  {capacity}%",
     "format-charging": "  {capacity}%",
